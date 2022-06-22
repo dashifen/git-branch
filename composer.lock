@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14033874a965611b58c38a71076d47f2",
+    "content-hash": "85cc98ef2da3adf8a1575825ff1c122f",
     "packages": [
         {
             "name": "dashifen/case-changing-trait",
@@ -132,6 +132,65 @@
                 "source": "https://github.com/dashifen/repository/tree/3.1.3"
             },
             "time": "2022-03-03T20:54:47+00:00"
+        },
+        {
+            "name": "phlak/semver",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHLAK/SemVer.git",
+                "reference": "f9899d28b4dc245247f69bb9c07256e81b4e9c43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHLAK/SemVer/zipball/f9899d28b4dc245247f69bb9c07256e81b4e9c43",
+                "reference": "f9899d28b4dc245247f69bb9c07256e81b4e9c43",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phlak/coding-standards": "^2.0",
+                "psy/psysh": "^0.10",
+                "vimeo/psalm": "^4.3",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "PHLAK\\SemVer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Kankiewicz",
+                    "email": "Chris@ChrisKankiewicz.com"
+                }
+            ],
+            "description": "Semantic versioning helper library",
+            "support": {
+                "issues": "https://github.com/PHLAK/SemVer/issues",
+                "source": "https://github.com/PHLAK/SemVer/tree/4.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/PHLAK",
+                    "type": "github"
+                },
+                {
+                    "url": "https://paypal.me/ChrisKankiewicz",
+                    "type": "paypal"
+                }
+            ],
+            "time": "2021-08-25T02:49:52+00:00"
         }
     ],
     "packages-dev": [],

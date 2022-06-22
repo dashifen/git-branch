@@ -3,8 +3,10 @@
 namespace Dashifen\Git\Traits;
 
 use Dashifen\Git\Branch;
+use PHLAK\SemVer\Version;
 use Dashifen\Git\BranchInterface;
 use Dashifen\Git\BranchException;
+use PHLAK\SemVer\Exceptions\InvalidVersionException;
 
 trait GitAwareTrait
 {
@@ -22,7 +24,7 @@ trait GitAwareTrait
   {
     if ($this->isGitRepo()) {
       $branch = $this->getGitBranches()[0] ?? null;
-  
+      
       if ($branch !== null) {
         $object = $this->getGitBranchObjectName();
         return new $object($branch);
@@ -150,8 +152,87 @@ trait GitAwareTrait
    *
    * @return string
    */
-  protected function getGitBranchObjectName(): string
+  public function getGitBranchObjectName(): string
   {
     return Branch::class;
+  }
+  
+  /**
+   * getGitTags
+   *
+   * Returns a list of tags within this repo.  As long as the parameter flag
+   * is set, it'll only return ones that match a semantic version number.
+   *
+   * @param bool $onlySemVerTags
+   *
+   * @return array
+   */
+  public function getGitTags(bool $onlySemVerTags = true): array
+  {
+    if (!$this->isGitRepo()) {
+      return [];
+    }
+    
+    exec('git tag', $tags);
+    
+    if ($onlySemVerTags) {
+      
+      // if we only want tags that match a semantic version number, we'll use
+      // the PHLAK/SemVer/Version object to parse our tags and keep only those
+      // that pass muster.
+      
+      $tags = array_filter($tags, function ($tag) {
+        try {
+          
+          // the InvalidVersionException is from within the parse method.  if
+          // it is thrown, we catch it here and return false because it's only
+          // thrown if $tag isn't a semantic version number.  otherwise, as
+          // long as we can parse the tag, we're good to go.
+          
+          return Version::parse($tag) instanceof Version;
+        } catch (InvalidVersionException $e) {
+          return false;
+        }
+      });
+      
+      // in a perfect world, tags would be in semver order.  alas, that world
+      // is not this one.  therefore, quickly sort our list of tags using the
+      // little-known PHP version_compare function.  that puts them in order
+      // from least to greatest version, so we quickly reverse them so our most
+      // recent version is first.
+      
+      usort($tags, 'version_compare');
+      $tags = array_reverse($tags);
+    }
+    
+    return $tags;
+  }
+  
+  /**
+   * getAllGitTags
+   *
+   * By default, the the method above limits the returned list of tags to
+   * those that match semantic versioning.  this method does away with that
+   * default and returns them all.
+   *
+   * @return array
+   */
+  public function getAllGitTags(): array
+  {
+    return $this->getGitTags(false);
+  }
+  
+  /**
+   * isTagged
+   *
+   * Returns true if the specified tag has been added to this repo.
+   *
+   * @param string $tag
+   *
+   * @return bool
+   */
+  public function isTagged(string $tag): bool
+  {
+    return $this->isGitRepo() && in_array($tag, $this->getAllGitTags());
   }
 }
