@@ -18,19 +18,18 @@ trait GitAwareTrait
    *
    * @return BranchInterface|null
    */
-  protected function getGitBranch(): ?BranchInterface
+  public function getGitBranch(): ?BranchInterface
   {
     if ($this->isGitRepo()) {
       $branch = $this->getGitBranches()[0] ?? null;
-      
-      if ($branch === null) {
-        return null;
+  
+      if ($branch !== null) {
+        $object = $this->getGitBranchObjectName();
+        return new $object($branch);
       }
-      
-      $object = $this->getGitBranchObjectName();
-      return new $object($branch);
     }
     
+    return null;
   }
   
   /**
@@ -40,7 +39,7 @@ trait GitAwareTrait
    *
    * @return bool
    */
-  protected function isGitRepo(): bool
+  public function isGitRepo(): bool
   {
     try {
       
@@ -66,7 +65,7 @@ trait GitAwareTrait
    * @return void
    * @throws BranchException
    */
-  protected function getGitDirectory(): string
+  public function getGitDirectory(): string
   {
     if (isset($this->root)) {
       return $this->root;
@@ -100,7 +99,7 @@ trait GitAwareTrait
    *
    * @return array
    */
-  protected function getGitBranches(): array
+  public function getGitBranches(): array
   {
     exec('git branch', $branches);
     

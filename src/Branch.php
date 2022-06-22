@@ -158,22 +158,19 @@ class Branch extends Repository implements BranchInterface
    */
   public function isParent(): bool
   {
-    // if this branches name is the prefix to another branch in this repo,
-    // then it's a parent.  to know that, we get the list of branches, filter
-    // using our name, and see if there are any left.  first:  if we're not
-    // at PHP8 yet, we won't have an str_starts_with method.  we'll create it
-    // here to use in that case.
+    // if this branch's name is the prefix to another branch in this repo, then
+    // it's a parent.  to figure that out, we get the list of branches, filter
+    // using our name property, and see if there are any left.
     
-    if (!function_exists('str_starts_with')) {
-      function str_starts_with(string $haystack, string $needle): bool
-      {
-        return strpos($haystack, $needle) === 0;
-      }
-    }
+    $filter = fn($branch) => strpos($branch, $this->name) === 0;
+    $branches = array_filter($this->getGitBranches(), $filter);
     
-    $branches = $this->getGitBranches();
-    $branches = array_filter($branches, fn($branch) => str_starts_with($this->name, $branch));
-    return sizeof($branches) > 0;
+    // why greater than one?  because the branch's name will always match
+    // itself.  so we should always have one value in the array, but if we have
+    // more than one, our branch matches another one and that means it has a
+    // child.
+    
+    return sizeof($branches) > 1;
   }
   
   /**
