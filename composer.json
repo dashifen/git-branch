@@ -1,0 +1,26 @@
+{
+  "name": "dashifen/git-branch",
+  "description": "An object that encapsulates information embedded in my branch naming scheme.",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "David Dashifen Kees",
+      "email": "dashifen@dashifen.com",
+      "role": "developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Dashifen\\Git\\": "src"
+    }
+  },
+  "require": {
+    "dashifen/exception": "^1.2",
+    "dashifen/repository": "^3.1"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}
