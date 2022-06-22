@@ -20,7 +20,7 @@ to know how to merge things.
 ## Branched Branches
 
 If I need to branch a "child" branch off a "parent," then the child's name
-follows the parents preceded by two hyphens.  For example:  `220622f-parent--child`.  
-This isn't strictly necessary, a child branch could simply be named as above, 
-but the order of merges might become a bit more messy without a record of what 
-was branched off of what.  
+follows the parent's preceded by 2 hyphens, e.g.  `220622f-parent--child`. This 
+isn't strictly necessary; a child branch could simply be named as above.  But, 
+the order of merges might become a bit more messy without a record of what was 
+branched off of what.  
