@@ -1,6 +1,6 @@
 <?php
 
-namespace Dashifen\Composer\Bumper\Git;
+namespace Dashifen\Git;
 
 use Dashifen\Exception\Exception;
 

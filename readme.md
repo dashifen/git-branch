@@ -1,4 +1,4 @@
-~~# Git Branch
+# Git Branch
 An object that encapsulates information embedded in my branch naming scheme.
 
 Based~~ on the success of a similar scheme that I use professionally, for newer 
