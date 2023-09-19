@@ -211,9 +211,9 @@ trait GitAwareTrait
   /**
    * getAllGitTags
    *
-   * By default, the the method above limits the returned list of tags to
-   * those that match semantic versioning.  this method does away with that
-   * default and returns them all.
+   * By default, the method above limits the returned list of tags to those
+   * that match semantic versioning.  this method does away with that default
+   * and returns them all.
    *
    * @return array
    */

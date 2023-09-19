@@ -182,8 +182,8 @@ class Branch extends Repository implements BranchInterface
    */
   public function isChild(): bool
   {
-    // a child can be identified when there are are two adjacent hyphens in
-    // its name.  for example:  220622f-parent--child.  so, if we find those
+    // a child can be identified when there are two adjacent hyphens in its
+    // name.  for example:  220622f-parent--child.  so, if we find those
     // hyphens, we return true.
     
     return strpos($this->name, '--') !== false;
@@ -205,9 +205,9 @@ class Branch extends Repository implements BranchInterface
     
     if ($year < 22) {
       
-      // i'm writing this in 2022.  i'll be dead by the time 2100 roles around
+      // I'm writing this in 2022.  I'll be dead by the time 2100 rolls around
       // so making sure that we have years that are greater than or equal to
-      // 2022 seems like an acceptable risk.  if i somehow cheat death and live
+      // 2022 seems like an acceptable risk.  if I somehow cheat death and live
       // to be 121, this will start throwing exceptions, but that seems like an
       // acceptable limitation at the moment.
       
